@@ -8,7 +8,9 @@ public class Unit : MonoBehaviour
     public UnitTag Tags;
     protected float currentHealth;
     [Header("Agression")]
-    public float AgressionRange;
+    public float AggressionRange;
+    [Range(0, 2)] public float AggressionCosCutoff;
+    public UnitTag AggressionTags;
     public void Awake()
     {
         OnSpawn();
@@ -16,6 +18,21 @@ public class Unit : MonoBehaviour
     protected virtual void OnSpawn()
     {
 
+    }
+    public bool CheckAggression(Unit targetUnit, Transform upAngleCheck)
+    {
+        if (targetUnit.HasTag(AggressionTags) == false)
+            return false;
+        Vector3 dir = targetUnit.transform.position - upAngleCheck.transform.position;
+        if (dir.magnitude > AggressionRange)
+            return false;
+
+
+        dir.Normalize();
+        float dot = upAngleCheck.up.x * dir.x + upAngleCheck.up.y * dir.y;
+        if (dot + 1 <= AggressionCosCutoff)
+            return false;
+        return true;
     }
     public void TakeDamage(float amount)
     {
@@ -31,6 +48,9 @@ public class Unit : MonoBehaviour
     }
     public bool HasTag(UnitTag tags)
     {
+        if (Tags == default) return true;
+        if (tags == default) return true;
+
         return (Tags & tags) != 0;
     }
 }
