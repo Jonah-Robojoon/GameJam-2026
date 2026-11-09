@@ -319,7 +319,7 @@ MonoBehaviour:
   Tags: 0
   AggressionRange: 5
   AggressionCosCutoff: 1.609
-  AggressionTags: 0
+  AggressionTags: 3
   target: {fileID: 809940160}
 --- !u!1 &809940157
 GameObject:
