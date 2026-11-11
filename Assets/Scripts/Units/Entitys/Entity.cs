@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Entity : Unit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Rigidbody2D Rb;
 
-    // Update is called once per frame
-    void Update()
+    public override void TakeDamage(float amount)
     {
-        
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        Rb.AddForce(new Vector2(Random.Range(0f, -1f), Random.Range(-1f, 1f)) * 1f, ForceMode2D.Impulse);
     }
 }
