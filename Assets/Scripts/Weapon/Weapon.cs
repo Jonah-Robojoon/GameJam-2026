@@ -4,13 +4,13 @@ public abstract class Weapon
 {
     protected float range;
     protected float angle;
-    protected float cooldown;
+    public float cooldown;
 
-    protected UnitTag unitType;
+    public UnitTag unitType;
 
-    private float currentCooldown;
+    public float currentCooldown;
 
-    public abstract void Shoot(Vector3 StartPos, Transform upAngleCheck);
+    public abstract void Shoot(Vector3 StartPos, Unit target, Transform upAngleCheck);
 
     protected abstract void Hit(Unit unit);
 
@@ -20,13 +20,5 @@ public abstract class Weapon
         this.angle = angle;
         this.cooldown = cooldown;
         this.unitType = unitType;
-    }
-
-    private void Update()
-    {
-        if (currentCooldown > 0)
-        {
-            currentCooldown -= Time.deltaTime;
-        }
     }
 }
