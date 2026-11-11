@@ -17,7 +17,9 @@ public class Unit : MonoBehaviour
     }
     protected virtual void OnSpawn()
     {
-
+        Debug.Log("Unit spawned");
+        UnitManager.Instance.Units.Add(this);
+        currentHealth = MaxHealth;
     }
     public bool CheckAggression(Unit targetUnit, Transform upAngleCheck)
     {
@@ -34,7 +36,7 @@ public class Unit : MonoBehaviour
             return false;
         return true;
     }
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
@@ -44,6 +46,7 @@ public class Unit : MonoBehaviour
     }
     public void Die()
     {
+        UnitManager.Instance.Units.Remove(this);
         Destroy(gameObject);
     }
     public bool HasTag(UnitTag tags)
