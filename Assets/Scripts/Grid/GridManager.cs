@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
     public static GridManager instance;
 
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] public Grid grid;
 
     public Dictionary<Vector3Int, TileData> GridDataMap = new Dictionary<Vector3Int, TileData>();
 
